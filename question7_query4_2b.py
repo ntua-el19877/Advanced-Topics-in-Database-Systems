@@ -54,7 +54,11 @@ for hint in join_hints:
     start_time=time.time()
 
     null_island_rows = df.filter((col("LAT") != 0.0) & (col("LON") != 0.0))
-
+    
+    null_island_rows = null_island_rows.where(
+        (null_island_rows["Weapon Used Cd"]>=100) & 
+        (null_island_rows["Weapon Used Cd"]<200))
+    
     # Convert the police stations DataFrame to a list of tuples
     stations_list = [(row['Y'], row['X'],row['PREC']) for row in police_stations.collect()]
 
