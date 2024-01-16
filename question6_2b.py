@@ -44,6 +44,10 @@ start_time=time.time()
 
 null_island_rows = df.filter((col("LAT") != 0.0) & (col("LON") != 0.0))
 
+null_island_rows = null_island_rows.where(
+    (null_island_rows["Weapon Used Cd"]>=100) & 
+    (null_island_rows["Weapon Used Cd"]<200))
+
 file_path1='hdfs:///user/data/LAPD_Police_Stations.csv'
 file_path2='hdfs:///user/data/revgecoding.csv'
 
