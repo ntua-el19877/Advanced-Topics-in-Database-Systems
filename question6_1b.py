@@ -40,6 +40,10 @@ revgecoding = spark.read.format("csv")\
 
 null_island_rows = df.filter((col("LAT") != 0.0) & (col("LON") != 0.0))
 
+null_island_rows = null_island_rows.where(
+    (null_island_rows["Weapon Used Cd"]>=100) & 
+    (null_island_rows["Weapon Used Cd"]<200))
+
 police_and_crimes=null_island_rows.join(police_stations, police_stations["PREC"] == null_island_rows["AREA "])
 
 # Register the function as a UDF
