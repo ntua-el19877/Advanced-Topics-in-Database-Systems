@@ -40,7 +40,11 @@ for hint in join_hints:
          .option("header", "true").option("inferSchema", "true").load(file_path2)
 
     null_island_rows = df.filter((col("LAT") != 0.0) & (col("LON") != 0.0))
-
+    
+    null_island_rows = null_island_rows.where(
+        (null_island_rows["Weapon Used Cd"]>=100) & 
+        (null_island_rows["Weapon Used Cd"]<200))
+    
     # Register the function as a UDF
     custom_udf = udf(haversine_distance, FloatType())
 
